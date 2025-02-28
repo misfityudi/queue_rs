@@ -20,6 +20,10 @@ impl<T: Clone> Queue<T> {
             self.items.remove(0);
         }
     }
+
+    pub fn front(&self) -> Option<T> {
+        self.items.first().cloned()
+    }
 }
 
 #[cfg(test)]
@@ -56,5 +60,15 @@ mod tests {
 
         queue.dequeue();
         assert_eq!(queue.items[0], i8::MIN);
+    }
+
+    #[test]
+    fn front() {
+        let mut queue = Queue::<i8>::new();
+        assert_eq!(queue.front(), None);
+
+        queue.enqueue(i8::MAX);
+        queue.enqueue(i8::MIN);
+        assert_eq!(queue.front(), Some(i8::MAX));
     }
 }
