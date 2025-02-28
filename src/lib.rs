@@ -10,6 +10,10 @@ impl<T: Clone> Queue<T> {
     pub fn enqueue(&mut self, item: T) {
         self.items.push(item);
     }
+
+    pub fn dequeue(&mut self) -> Option<T> {
+        self.items.first().cloned()
+    }
 }
 
 #[cfg(test)]
@@ -28,5 +32,15 @@ mod tests {
         let item = i8::MAX;
         queue.enqueue(item);
         assert_eq!(queue.items.len(), 1);
+    }
+
+    #[test]
+    fn dequeue() {
+        let mut queue = Queue::new();
+        queue.enqueue(i8::MAX);
+        queue.enqueue(i8::MIN);
+
+        let item = queue.dequeue();
+        assert_eq!(item, Some(i8::MAX));
     }
 }
