@@ -28,6 +28,10 @@ impl<T: Clone> Queue<T> {
     pub fn is_empty(&self) -> bool {
         self.items.is_empty()
     }
+
+    pub fn size(&self) -> usize {
+        self.items.len()
+    }
 }
 
 #[cfg(test)]
@@ -80,5 +84,14 @@ mod tests {
     fn is_empty() {
         let queue = Queue::<i8>::new();
         assert!(queue.is_empty());
+    }
+
+    #[test]
+    fn size() {
+        let mut queue = Queue::<i8>::new();
+
+        queue.enqueue(i8::MAX);
+        queue.enqueue(i8::MIN);
+        assert_eq!(queue.size(), 2);
     }
 }
