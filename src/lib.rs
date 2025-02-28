@@ -32,6 +32,10 @@ impl<T: Clone> Queue<T> {
     pub fn size(&self) -> usize {
         self.items.len()
     }
+
+    pub fn clear(&mut self) {
+        self.items.clear();
+    }
 }
 
 #[cfg(test)]
@@ -93,5 +97,15 @@ mod tests {
         queue.enqueue(i8::MAX);
         queue.enqueue(i8::MIN);
         assert_eq!(queue.size(), 2);
+    }
+
+    #[test]
+    fn clear() {
+        let mut queue = Queue::<i8>::new();
+
+        queue.enqueue(i8::MAX);
+        queue.enqueue(i8::MIN);
+        queue.clear();
+        assert_eq!(queue.size(), 0);
     }
 }
