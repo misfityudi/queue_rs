@@ -15,8 +15,10 @@ impl<T: Clone> Queue<T> {
         self.items.extend(items);
     }
 
-    pub fn dequeue(&mut self) -> Option<T> {
-        self.items.first().cloned()
+    pub fn dequeue(&mut self) {
+        if !self.items.is_empty() {
+            self.items.remove(0);
+        }
     }
 }
 
@@ -52,7 +54,7 @@ mod tests {
         queue.enqueue(i8::MAX);
         queue.enqueue(i8::MIN);
 
-        let item = queue.dequeue();
-        assert_eq!(item, Some(i8::MAX));
+        queue.dequeue();
+        assert_eq!(queue.items[0], i8::MIN);
     }
 }
