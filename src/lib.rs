@@ -11,6 +11,10 @@ impl<T: Clone> Queue<T> {
         self.items.push(item);
     }
 
+    pub fn enqueue_items(&mut self, items: Vec<T>) {
+        self.items.extend(items);
+    }
+
     pub fn dequeue(&mut self) -> Option<T> {
         self.items.first().cloned()
     }
@@ -32,6 +36,14 @@ mod tests {
         let item = i8::MAX;
         queue.enqueue(item);
         assert_eq!(queue.items.len(), 1);
+    }
+
+    #[test]
+    fn enqueue_items() {
+        let mut queue = Queue::new();
+        let items = vec![1, 2, 3];
+        queue.enqueue_items(items);
+        assert_eq!(queue.items.len(), 3);
     }
 
     #[test]
