@@ -24,6 +24,10 @@ impl<T: Clone> Queue<T> {
     pub fn front(&self) -> Option<T> {
         self.items.first().cloned()
     }
+
+    pub fn is_empty(&self) -> bool {
+        self.items.is_empty()
+    }
 }
 
 #[cfg(test)]
@@ -70,5 +74,11 @@ mod tests {
         queue.enqueue(i8::MAX);
         queue.enqueue(i8::MIN);
         assert_eq!(queue.front(), Some(i8::MAX));
+    }
+
+    #[test]
+    fn is_empty() {
+        let queue = Queue::<i8>::new();
+        assert!(queue.is_empty());
     }
 }
