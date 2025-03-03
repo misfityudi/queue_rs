@@ -11,7 +11,7 @@ impl<T: Clone> Queue<T> {
         self.items.push(item);
     }
 
-    pub fn enqueue_items(&mut self, items: Vec<T>) {
+    pub fn bulk_enqueue(&mut self, items: Vec<T>) {
         self.items.extend(items);
     }
 
@@ -60,7 +60,7 @@ mod tests {
     fn enqueue_items() {
         let mut queue = Queue::new();
         let items = vec![1, 2, 3];
-        queue.enqueue_items(items);
+        queue.bulk_enqueue(items);
         assert_eq!(queue.items.len(), 3);
     }
 
