@@ -1,1 +1,12 @@
 /target
+**/*.rs.bk
+.env
+.DS_Store
+*.log
+node_modules/
+.idea/
+.vscode/
+# SQLx offline data file.
+# This file is required for offline builds and should be committed to the repository.
+# The '!' ensures it is not ignored even if a parent directory has a *.json rule.
+!sqlx-data.json
